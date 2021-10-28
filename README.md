@@ -1,71 +1,52 @@
-<!-- a countdown timer ending at September 21st 2071
-    written with vanilla javascript and no external libraries
--->
+<!-- this page will display a countdown timer to the date of September 12st, 2071 -->
 <html>
-    <head>
+	<head>
+		<title>Countdown Timer</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<!-- font awesome -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+		<!-- custom css -->
+		<link rel="stylesheet" type="text/css" href="css/countdown.css">
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="jumbotron">
+						<h1>Countdown Timer</h1>
+						<!-- here we will display the countdown timer -->
+						<h2 id="countdown"></h2>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- javascript -->
         <script type="text/javascript">
-            // the date to count down to
-            var targetDate = new Date("September 21, 2071").getTime();
-            // current date
-            var currentDate = new Date().getTime();
-            // difference between the two dates
-            var timeLeft = targetDate - currentDate;
-            // time left in days
-            var daysLeft = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            // time left in hours
-            var hoursLeft = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            // time left in minutes
-            var minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            // time left in seconds
-            var secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
-            // update the timer every second
-            var timer = setInterval(function() {
-                // update the time left
-                timeLeft = targetDate - new Date().getTime();
-                // update the days left
-                daysLeft = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                // update the hours left
-                hoursLeft = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                // update the minutes left
-                minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                // update the seconds left
-                secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                // update the html
-                document.getElementById("days").innerHTML = daysLeft;
-                document.getElementById("hours").innerHTML = hoursLeft;
-                document.getElementById("minutes").innerHTML = minutesLeft;
-                document.getElementById("seconds").innerHTML = secondsLeft;
-                // if the time is up
-                if (timeLeft < 0) {
-                    // stop the timer
-                    clearInterval(timer);
-                    // update the html
-                    document.getElementById("days").innerHTML = "0";
-                    document.getElementById("hours").innerHTML = "0";
-                    document.getElementById("minutes").innerHTML = "0";
-                    document.getElementById("seconds").innerHTML = "0";
-                }
-            }, 1000);
+            // this function will display the countdown timer
+            function countdown() {
+                // this will get the current date and time
+                var now = new Date();
+                // this will get the date and time of the date and time of the event
+                var eventDate = new Date(2071, 8, 12);
+                // this will get the difference between the two dates
+                var diff = eventDate.getTime() - now.getTime();
+                // this will get the days, hours, minutes, and seconds
+                var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                // this will display the countdown timer
+                document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";  
+            }
+            // this will call the countdown function every second
+            setInterval(countdown, 1000);
         </script>
-        <style>
-            .countdown {
-                font-size: 2em;
-                font-weight: bold;
-                text-align: center;
-            }
-            .countdown span {
-                display: inline-block;
-                width: 2em;
-                text-align: center;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="countdown">
-            <span id="days">0</span>
-            <span id="hours">0</span>
-            <span id="minutes">0</span>
-            <span id="seconds">0</span>
-        </div>
-    </body>
+    </body> 
 </html>
