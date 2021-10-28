@@ -1,37 +1,71 @@
-## Welcome to GitHub Pages
-
-You can use the [editor on GitHub](https://github.com/piyh/piyh/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/piyh/piyh/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+<!-- a countdown timer ending at September 21st 2071
+    written with vanilla javascript and no external libraries
+-->
+<html>
+    <head>
+        <script type="text/javascript">
+            // the date to count down to
+            var targetDate = new Date("September 21, 2071").getTime();
+            // current date
+            var currentDate = new Date().getTime();
+            // difference between the two dates
+            var timeLeft = targetDate - currentDate;
+            // time left in days
+            var daysLeft = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            // time left in hours
+            var hoursLeft = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            // time left in minutes
+            var minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            // time left in seconds
+            var secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            // update the timer every second
+            var timer = setInterval(function() {
+                // update the time left
+                timeLeft = targetDate - new Date().getTime();
+                // update the days left
+                daysLeft = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                // update the hours left
+                hoursLeft = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                // update the minutes left
+                minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                // update the seconds left
+                secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                // update the html
+                document.getElementById("days").innerHTML = daysLeft;
+                document.getElementById("hours").innerHTML = hoursLeft;
+                document.getElementById("minutes").innerHTML = minutesLeft;
+                document.getElementById("seconds").innerHTML = secondsLeft;
+                // if the time is up
+                if (timeLeft < 0) {
+                    // stop the timer
+                    clearInterval(timer);
+                    // update the html
+                    document.getElementById("days").innerHTML = "0";
+                    document.getElementById("hours").innerHTML = "0";
+                    document.getElementById("minutes").innerHTML = "0";
+                    document.getElementById("seconds").innerHTML = "0";
+                }
+            }, 1000);
+        </script>
+        <style>
+            .countdown {
+                font-size: 2em;
+                font-weight: bold;
+                text-align: center;
+            }
+            .countdown span {
+                display: inline-block;
+                width: 2em;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="countdown">
+            <span id="days">0</span>
+            <span id="hours">0</span>
+            <span id="minutes">0</span>
+            <span id="seconds">0</span>
+        </div>
+    </body>
+</html>
